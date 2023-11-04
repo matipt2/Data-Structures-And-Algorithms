@@ -1,20 +1,20 @@
 #include <iostream>
 using namespace std;
 
-#define MIN (-10000000)
+#define MIN (-10000000) // Definiujemy stałą MIN.
 
 class List {
 private:
-    int array[10];
-    int size;
-    int last;
+    int array[10]; // Tablica przechowująca elementy listy.
+    int size; // Aktualny rozmiar listy.
+    int last; // Indeks ostatniego elementu na liście.
 
 public:
     List() {
         size = 0; // Początkowo lista jest pusta, więc rozmiar wynosi 0.
         last = -1; // Brak elementów w tablicy, więc last jest -1.
         for (int i = 0; i < 10; i++) {
-            array[i] = MIN;
+            array[i] = MIN; // Inicjalizujemy tablicę wartością MIN.
         }
     }
 
@@ -22,25 +22,25 @@ public:
         if (size == 0) {
             return -1; // Lista jest pusta.
         }
-        return 0;
+        return 0; // Zwracamy indeks pierwszego elementu.
     }
 
     int end() {
-        return last + 1;
+        return last + 1; // Zwracamy indeks za ostatnim elementem.
     }
 
     int next(int p) {
         if (p < 0 || p >= last) {
-            return -1;
+            return -1; // Niepoprawna pozycja.
         }
-        return p + 1;
+        return p + 1; // Zwracamy indeks następnego elementu.
     }
 
     int previous(int p) {
         if (p <= 0 || p > last) {
-            return -1;
+            return -1; // Niepoprawna pozycja.
         }
-        return p - 1;
+        return p - 1; // Zwracamy indeks poprzedniego elementu.
     }
 
     bool Insert(int x, int p) {
@@ -53,34 +53,34 @@ public:
         }
 
         for (int i = last; i >= p; i--) {
-            array[i + 1] = array[i];
+            array[i + 1] = array[i]; // Przesuwamy elementy, aby zrobić miejsce dla nowego elementu.
         }
 
-        array[p] = x;
-        size++;
-        last++;
-        return true;
+        array[p] = x; // Wstawiamy nowy element.
+        size++; // Zwiększamy rozmiar listy.
+        last++; // Aktualizujemy indeks ostatniego elementu.
+        return true; // Operacja zakończona sukcesem.
     }
 
     bool Delete(int p) {
         if (p < 0 || p > last) {
-            return false;
+            return false; // Niepoprawna pozycja.
         }
 
         for (int i = p; i < last; i++) {
-            array[i] = array[i + 1];
+            array[i] = array[i + 1]; // Usuwamy element przesuwając pozostałe elementy.
         }
 
-        array[last] = MIN;
-        size--;
-        last--;
-        return true;
+        array[last] = MIN; // Ostatni element otrzymuje wartość MIN.
+        size--; // Zmniejszamy rozmiar listy.
+        last--; // Aktualizujemy indeks ostatniego elementu.
+        return true; // Operacja zakończona sukcesem.
     }
 
     int Locate(int x) {
         for (int i = 0; i <= last; i++) {
             if (array[i] == x) {
-                return i;
+                return i; // Znaleziono element.
             }
         }
         return -1; // Element nie został znaleziony.
@@ -88,7 +88,7 @@ public:
 
     int Retrieve(int p) {
         if (p >= 0 && p <= last) {
-            return array[p];
+            return array[p]; // Zwracamy element na danej pozycji.
         }
         return MIN; // Niepoprawna pozycja lub brak elementu na danej pozycji.
     }
@@ -97,14 +97,15 @@ public:
         for (int i = 0; i <= last; i++) {
             for (int j = i + 1; j <= last;) {
                 if (array[i] == array[j]) {
-                    Delete(j);
+                    Delete(j); // Usuwamy duplikat.
                 } else {
-                    j++;
+                    j++; // Przechodzimy do następnego elementu.
                 }
             }
         }
     }
 };
+
 
 int main() {
     List myList;
