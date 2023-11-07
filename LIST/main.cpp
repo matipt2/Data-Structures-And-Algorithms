@@ -8,13 +8,15 @@ private:
     int* array;
     int size;
     int last;
+    int listCapacity;
 
 public:
     List() {
         size = 0;
         last = -1;
-        array = new int[10];
-        for (int i = 0; i < 10; i++) {
+        listCapacity = 10;
+        array = new int[listCapacity];
+        for (int i = 0; i < listCapacity; i++) {
             array[i] = MIN;
         }
     }
@@ -23,7 +25,26 @@ public:
         delete[] array;
     }
 
+    // Funkcja addMoreSpace() dynamicznie zwieksza pojemnosc tablicy
+    // gdy lista osiąga swoją pojemność. Nowa pojemność wynosi dwukrotność
 
+    void addMoreSpace() {
+        // stworzenie nowej tablicy z dwa razy wieksza pojemnoscia
+        int* newArray = new int[listCapacity * 2];
+
+        //przeniesienie elementow ze starej tablicy do nowej
+        for (int i = 0; i < size; i++) {
+            newArray[i] = array[i];
+        }
+        // wypelnienie tych pozostalych miejsc liczba MIN
+        for (int i = size; i < listCapacity * 2; i++) {
+            newArray[i] = MIN;
+        }
+        // usuneicie starej tablicy i przypisanie nowej tablicy wartosci starej
+        delete[] array;
+        array = newArray;
+        listCapacity *= 2;
+    }
 
     int Next(int p) {
         if (p < 0 || p >= last) {
@@ -55,8 +76,8 @@ public:
     }
 
     bool Insert(int x, int p) {
-        if (size >= 10) {
-            return false;
+        if (size >= listCapacity) {
+            addMoreSpace();
         }
 
         if (p < 0 || p > last + 1) {
@@ -98,7 +119,9 @@ public:
         }
         return MIN;
     }
+
 };
+
 
 int main() {
     List myList;
