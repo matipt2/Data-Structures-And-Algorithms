@@ -1,0 +1,3 @@
+/Users/mateuszptasik/Desktop/DSA/LinkedList/cmake-build-debug/CMakeFiles/LinkedList.dir
+/Users/mateuszptasik/Desktop/DSA/LinkedList/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/mateuszptasik/Desktop/DSA/LinkedList/cmake-build-debug/CMakeFiles/rebuild_cache.dir
