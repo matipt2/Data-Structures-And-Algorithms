@@ -316,6 +316,7 @@ int main() {
 
     cell<int>* pierwszaKomorka = list2.First();
     std::cout << "Pierwszy element: " << list2.Retrieve(pierwszaKomorka) << std::endl;
+    //koniec
 
     return 0;
 }
