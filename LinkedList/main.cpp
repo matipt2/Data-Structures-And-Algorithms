@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 
 template <typename T>
 class cell {
@@ -236,87 +237,273 @@ public:
         std::cout << std::endl;
     }
 };
+template <typename T>
+class Queue{
+private:
+    Lista1<T> list;
+
+public:
+    void put(T x){
+        list.Insert(x, list.Last());
+    }
+
+    T get(){
+        if(empty()){
+            throw std::out_of_range("queue empty");
+        }
+        else{
+            cell<T>* firstElement = list.First();
+            T element = list.Retrieve(firstElement);
+            list.Delete(firstElement);
+            return element;
+}
+    }
+
+    T front(){
+        if(empty()){
+            throw std::out_of_range("queue empty");
+        }
+        else{
+            cell<T>* firstElement = list.First();
+            return list.Retrieve(firstElement);
+
+        }
+    }
+
+    void makenull(){
+        while(!empty()){
+            list.Delete(list.First());
+        }
+    }
+    bool empty(){
+        return list.First()==nullptr;
+    }
+};
+template <typename T>
+class CircularQueue {
+private:
+    T* array;           // Tablica przechowująca elementy kolejki
+    int capacity;       // Pojemność kolejki (maksymalna liczba elementów)
+    int frontIndex;      // Indeks początku kolejki
+    int rearIndex;       // Indeks końca kolejki
+    int currentSize;     // Aktualna liczba elementów w kolejce
+
+public:
+    // Konstruktor
+    CircularQueue(int size) : capacity(size), frontIndex(-1), rearIndex(-1), currentSize(0) {
+        array = new T[capacity];
+    }
+
+    // Destruktor
+    ~CircularQueue() {
+        delete[] array;
+    }
+
+    // Dodaje element do kolejki
+    bool put(T x) {
+        if(currentSize == capacity){
+            return false;
+        }
+        if(empty()){
+            frontIndex = 0;
+        }
+        rearIndex = (rearIndex + 1) % capacity;
+        array[rearIndex] = x;
+        currentSize++;
+        return true;
+    }
+
+    // Pobiera (i usuwa) pierwszy element z kolejki
+    T get() {
+        T firstElement = array[frontIndex];
+        if(empty()){
+            throw std::out_of_range("queue empty");
+        }
+        if(frontIndex==rearIndex){
+            frontIndex= -1;
+            rearIndex = -1;
+        }
+        else{
+            frontIndex = (frontIndex+1)%capacity; //gdy indeks frontu osiągnie końcową pozycję tablicy, dzięki wyrażeniu (frontIndex + 1) % capacity
+            // , indeks frontu jest przesuwany na początek tablicy, tworząc efekt cykliczny w kolejkach.
+        }
+        currentSize--;
+        return firstElement;
+    }
+
+    // Zwraca element znajdujący się na początku kolejki (bez usuwania)
+    T front() {
+        if(empty()){
+            throw std::out_of_range("queue empty");
+        }
+        T firstElement = array[frontIndex];
+        return firstElement;
+    }
+
+    // Usuwa wszystkie elementy z kolejki
+    void makenull() {
+        frontIndex = 0;
+        rearIndex =0;
+        currentSize = 0;
+    }
+
+    // Sprawdza, czy kolejka jest pusta
+    bool empty() {
+        if(currentSize==0) {
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    // Sprawdza, czy kolejka jest pełna
+    bool isFull() {
+        return currentSize == capacity;
+    }
+};
+template <typename T>
+class Stack {
+private:
+    Lista1<T> list;
+
+public:
+    void push(T x) {
+        list.Insert(x, list.Last());
+    }
+
+    T pop() {
+        if (empty()) {
+            return std::numeric_limits<T>::max();
+        }
+        cell<T>* firstElement = list.Last();
+        T top = list.Retrieve(firstElement);
+        list.Delete(list.Previous(firstElement));
+        return top;
+    }
+
+    T top() {
+        if (empty()) {
+            return std::numeric_limits<T>::max();
+        }
+        cell<T>* topElement = list.Last();
+        return list.Retrieve(topElement);
+    }
+
+    void makenull() {
+        while (!empty()) {
+            list.Delete(list.Previous(list.First()));
+        }
+        return std::numeric_limits<T>::max();
+    }
+
+    bool empty() {
+        return list.First() == nullptr;
+    }
+
+    void print() {
+        list.print();
+    }
+};
+
+template <typename T>
+class Stack2{
+private:
+    static const int size = 100;
+    T arr[size];
+    int topIndex;
+public:
+    Stack2(): topIndex(-1){
+
+    }
+    bool push(T x){
+        if(topIndex+1 >= size){
+            return false;
+        }
+        arr[topIndex+1]= x;
+        topIndex++;
+        return true;
+    }
+    T pop() {
+        if (!empty()) {
+            T topElement = arr[topIndex];
+            topIndex--;
+            return topElement;
+        }
+        return std::numeric_limits<T>::max();
+    }
+    T top() {
+        if (empty()) {
+            return std::numeric_limits<T>::max();
+        }
+        return arr[topIndex];
+    }
+    void makenull(){
+        topIndex = -1;
+    }
+    bool empty(){
+        return topIndex==-1;
+    }
+};
 
 
 int main() {
-    std::cout << "" << std::endl;
-    std::cout << "Lista jednokierunkowa" << std::endl;
-    std::cout << "" << std::endl;
-    Lista1<int> list1;
-    list1.Insert(55, list1.Last());
-    list1.Insert(31, list1.Last());
-    list1.Insert(44, list1.Last());
-    std::cout << "po wstawieniu 3 elementow: ";
-    list1.print();
+    // Test the Stack class
 
+    Stack<int> intStack;
 
-    list1.Insert(5, 0);
-    std::cout << "po wstawieniu na poczetku 5: ";
-    list1.print();
+    // Push some elements onto the stack
+    intStack.push(1);
+    intStack.push(2);
+    intStack.push(3);
 
-    list1.Delete(list1.Previous(list1.Last()));
-    std::cout << "po usunieciu ostatniego elementu: ";
-    list1.print();
+    // Print the stack
+    std::cout << "Stack: ";
+    intStack.print();
 
-    cell<int>* cell5 = list1.Locate(5);
-    if (cell5 != nullptr)
-        std::cout << "Znaleziono element 5\n";
-    else
-        std::cout << "Nie znaleziono elementu 5\n";
+    // Pop an element
+    int poppedElement = intStack.pop();
+    std::cout << "Popped Element: " << poppedElement << std::endl;
 
-    cell<int>* cell6 = list1.Locate(30);
-    if (cell6 != nullptr) {
-        std::cout << "Znaleziono element 30\n";
-        list1.Delete(cell6);
-        std::cout << "po usunieciu elementu 30: ";
-        list1.print();
-    } else {
-        std::cout << "Nie znaleziono elementu 30\n";
-    }
-    std::cout << "" << std::endl;
-    std::cout << "Lista dwukierunkowa" << std::endl;
-    std::cout << "" << std::endl;
-    Lista2<int> list2;
-    list2.Insert(230, list2.Last());
-    list2.Insert(24, list2.Last());
-    list2.Insert(36, list2.Last());
-    std::cout << "po wstawieniu 3 elementow: ";
-    list2.print();
+    // Print the stack after popping
+    std::cout << "Stack: ";
+    intStack.print();
 
-    list2.Insert(15, list2.Previous(list2.Last()));
-    std::cout << "po wstawieniu przed ostatnim elementem 15: ";
-    list2.print();
+    // Get the top element
+    int topElement = intStack.top();
+    std::cout << "Top Element: " << topElement << std::endl;
 
-    list2.Delete(list2.First());
-    std::cout << "po usunieciu pierwszego elementu: ";
-    list2.print();
+    // Check if the stack is empty
+    std::cout << "Is the stack empty? " << (intStack.empty() ? "Yes" : "No") << std::endl;
 
-    cell<int>* cell7 = list2.Locate(15);
-    if (cell7 != nullptr)
-        std::cout << "Znaleziono element 15\n";
-    else
-        std::cout << "Nie znaleziono elementu 15\n";
-
-    cell<int>* cell8 = list2.Locate(10);
-    if (cell8 != nullptr) {
-        std::cout << "Znaleziono element 10\n";
-        list2.Delete(cell8);
-        std::cout << "po usunieciu elementu 10: ";
-        list2.print();
-    } else {
-        std::cout << "Nie znaleziono elementu 10\n";
+    Stack2<int> myStack;
+    std::cout << "Pushing elements onto the stack:" << std::endl;
+    for (int i = 1; i <= 5; ++i) {
+        std::cout << "Push: " << i << std::endl;
+        myStack.push(i);
     }
 
+    std::cout << "Testing top() without popping:" << std::endl;
+    std::cout << "Top: " << myStack.top() << std::endl;
 
-    cell<int>* cell30 = list2.Locate(30);
-    if (cell30 != nullptr) {
-        int wartość = list2.Retrieve(cell30);
-        std::cout << "Pobrana wartosc z komorki z elementem 30: " << wartość << std::endl;
+    // Test case 2: Create a stack, push elements, and pop one element
+    std::cout << "Pushing elements onto the stack:" << std::endl;
+    for (int i = 1; i <= 5; ++i) {
+        std::cout << "Push: " << i << std::endl;
+        myStack.push(i);
     }
 
-    cell<int>* pierwszaKomorka = list2.First();
-    std::cout << "Pierwszy element: " << list2.Retrieve(pierwszaKomorka) << std::endl;
-    //koniec
+    std::cout << "Popping one element from the stack:" << std::endl;
+    std::cout << "Pop: " << myStack.pop() << std::endl;
+
+    // Test case 3: Create a stack, push one element, and pop it
+    std::cout << "Pushing one element onto the stack:" << std::endl;
+    std::cout << "Push: 42" << std::endl;
+    myStack.push(42);
+
+    std::cout << "Popping one element from the stack:" << std::endl;
+    std::cout << "Pop: " << myStack.pop() << std::endl;
+
+
 
     return 0;
 }
