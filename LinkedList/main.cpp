@@ -447,32 +447,19 @@ public:
 
 
 int main() {
-    // Test the Stack class
 
     Stack<int> intStack;
-
-    // Push some elements onto the stack
     intStack.push(1);
     intStack.push(2);
     intStack.push(3);
-
-    // Print the stack
     std::cout << "Stack: ";
     intStack.print();
-
-    // Pop an element
     int poppedElement = intStack.pop();
     std::cout << "Popped Element: " << poppedElement << std::endl;
-
-    // Print the stack after popping
     std::cout << "Stack: ";
     intStack.print();
-
-    // Get the top element
     int topElement = intStack.top();
     std::cout << "Top Element: " << topElement << std::endl;
-
-    // Check if the stack is empty
     std::cout << "Is the stack empty? " << (intStack.empty() ? "Yes" : "No") << std::endl;
 
     Stack2<int> myStack;
@@ -484,8 +471,6 @@ int main() {
 
     std::cout << "Testing top() without popping:" << std::endl;
     std::cout << "Top: " << myStack.top() << std::endl;
-
-    // Test case 2: Create a stack, push elements, and pop one element
     std::cout << "Pushing elements onto the stack:" << std::endl;
     for (int i = 1; i <= 5; ++i) {
         std::cout << "Push: " << i << std::endl;
@@ -494,8 +479,6 @@ int main() {
 
     std::cout << "Popping one element from the stack:" << std::endl;
     std::cout << "Pop: " << myStack.pop() << std::endl;
-
-    // Test case 3: Create a stack, push one element, and pop it
     std::cout << "Pushing one element onto the stack:" << std::endl;
     std::cout << "Push: 42" << std::endl;
     myStack.push(42);
