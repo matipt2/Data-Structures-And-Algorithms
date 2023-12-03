@@ -19,51 +19,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d81e8d2c-d3a4-4788-941d-723fbcf04074" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LIST/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LIST/.idea/LIST.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LIST/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LIST/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LIST/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LIST/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LIST/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LIST/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/.idea/LinkedList.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/.cmake/api/v1/query/cache-v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/.cmake/api/v1/query/cmakeFiles-v1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/.cmake/api/v1/query/codemodel-v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/.cmake/api/v1/query/toolchains-v1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/.cmake/api/v1/reply/cache-v2-917776291c257aeea96d.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-1f29a65f9b8e88a93608.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-b383dac8544104e2f415.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/.cmake/api/v1/reply/directory-.-Debug-f5ebdc15457944623624.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/.cmake/api/v1/reply/index-2023-11-08T11-12-48-0416.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/.cmake/api/v1/reply/target-LinkedList-Debug-d7ce7557672198fcb2c8.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-2ebdd397a9b9a925bf87.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/CMakeCache.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/CMakeFiles/3.23.2/CMakeCCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/CMakeFiles/3.23.2/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/CMakeFiles/3.23.2/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/CMakeFiles/3.23.2/CMakeSystem.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/CMakeFiles/3.23.2/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/CMakeFiles/3.23.2/CompilerIdC/CMakeCCompilerId.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/CMakeFiles/3.23.2/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/CMakeFiles/3.23.2/CompilerIdCXX/CMakeCXXCompilerId.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/CMakeFiles/CMakeError.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/CMakeFiles/cmake.check_cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/CMakeFiles/rules.ninja" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/build.ninja" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/cmake-build-debug/cmake_install.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LinkedList/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LinkedList/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Queue/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Stack/main.cpp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,6 +77,8 @@
       <workItem from="1700580632959" duration="54000" />
       <workItem from="1700580696144" duration="46000" />
       <workItem from="1700580753979" duration="93000" />
+      <workItem from="1701178907624" duration="18000" />
+      <workItem from="1701196786994" duration="10000" />
     </task>
     <servers />
   </component>
