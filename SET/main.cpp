@@ -1,31 +1,33 @@
 #include <iostream>
 
+template<typename T>
 struct Node {
-    int value;
+    T value;
     Node* next;
 
-    Node(int val) {
+    Node(T val) {
         value = val;
         next = nullptr;
     }
 };
 
+template<typename T>
 class Set {
 private:
-    Node* head;
+    Node<T>* head;
 
 public:
     Set() : head(nullptr) {}
 
 
-    void add(int value) {
+    void add(T value) {
         if(!contains(value)){
-            Node* newest_Node = new Node(value);
+            Node<T>* newest_Node = new Node<T>(value);
             if(head == nullptr){
                 head = newest_Node;
             }
             else{
-                Node* temp = head;
+                Node<T>* temp = head;
                 while(temp->next != nullptr){
                     temp = temp->next;
                 }
@@ -35,9 +37,9 @@ public:
     }
 
 
-    void remove(int value) {
-        Node* current_node = head;
-        Node* prev_node = nullptr;
+    void remove(T value) {
+        Node<T>* current_node = head;
+        Node<T>* prev_node = nullptr;
         while(current_node!= nullptr && current_node->value != value){
             prev_node = current_node;
             current_node = current_node->next;
@@ -56,7 +58,7 @@ public:
 
 
     void display() {
-        Node* current_node = head;
+        Node<T>* current_node = head;
         while(current_node!= nullptr){
             std::cout << "current_node = " << current_node->value << std::endl;
             current_node = current_node->next;
@@ -64,45 +66,69 @@ public:
     }
 
 
-    bool contains(int value) {
-        Node* current_node = head;
-        while(current_node != nullptr){
-            if(current_node->value == value){
+    bool contains(T value) const {
+        Node<T>* current_node = head;
+        while (current_node != nullptr) {
+            if (current_node->value == value) {
                 return true;
             }
             current_node = current_node->next;
         }
         return false;
-
     }
 
 
-    Set unionSet(const Set& other) const {
-
+    Set<T> unionSet(const Set<T>& other) const {
+        Set<T> unionedSet;
+        Node<T>* current = head;
+        while(current!= nullptr){
+            unionedSet.add(current->value);
+            current = current ->next;
+        }
+        current = other.head;
+        while(current!= nullptr){
+            unionedSet.add(current->value);
+            current = current->next;
+        }
+        return unionedSet;
     }
 
 
-    Set difference(const Set& other) const {
-
+    Set<T> difference(const Set<T>& other) const {
+        Node<T>* current = head;
+        Set<T> differencedSet;
+        while(current!= nullptr){
+            if(!other.contains(current->value)){
+                differencedSet.add(current->value);
+                current = current->next;
+            }
+            else{
+                current = current->next;
+            }
+        }
+        return differencedSet;
     }
 
-
-    Set intersection(const Set& other) const {
-
+    Set<T> intersection(const Set<T>& other) const {
+        Set<T> intersectionSet;
+        Node<T>* current = head;
+        while (current != nullptr) {
+            if (other.contains(current->value)) {
+                intersectionSet.add(current->value);
+            }
+            current = current->next;
+        }
+        return intersectionSet;
     }
 
     ~Set() {
-        Node* current = head;
+        Node<T>* current = head;
         while (current != nullptr) {
-            Node* temp = current;
+            Node<T>* temp = current;
             current = current->next;
             delete temp;
         }
     }
 };
 
-int main() {
-
-
-    return 0;
-}
+int main() {return 0;}
