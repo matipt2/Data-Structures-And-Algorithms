@@ -1,11 +1,12 @@
 #include <iostream>
 #include <vector>
-class UndirectedGraph {
+#include <unordered_map>
+class UndirectedGraphVector {
 public:
     int V;
     std::vector<std::vector<int>>adj;
 
-    UndirectedGraph(int vert) : V(vert){
+    UndirectedGraphVector(int vert) : V(vert){
         adj.resize(V+1, std::vector<int>(V+1,0));
     }
     void addEdge(int v, int w){
@@ -32,12 +33,12 @@ public:
 
 };
 
-class DirectedGraph{
+class DirectedGraphVector{
 public:
     int V;
     std::vector<std::vector<int>>adj;
 
-    DirectedGraph(int vert) :V(vert){
+    DirectedGraphVector(int vert) : V(vert){
         adj.resize(V+1, std::vector<int>(V+1,0));
     }
     void addEdge(int v, int w){
@@ -93,50 +94,107 @@ public:
     }
 };
 
+class UndirectedGraphDictionary{
+private:
+    std::unordered_map<int, std::vector<int>> adj;
+public:
 
+    void addEdge(int v, int w){
+        adj[v].push_back(w);
+        adj[w].push_back(v);
+
+    }
+
+    int degree(int vertex){
+        int counter = 0;
+        auto it = adj.find(vertex);
+        const auto& neighbors = it->second;
+        counter = neighbors.size();
+        return counter;
+    }
+    std::vector<int> neighbors(int vertex){
+        std::vector<int> neighList;
+        auto it = adj.find(vertex);
+        const auto& neighbors = it->second;
+        for(int neighb: neighbors){
+            neighList.push_back(neighb);
+        }
+        return neighList;
+    }
+
+    void printGraph() {
+        for (const auto& pair : adj) {
+            std::cout << pair.first << " -> ";
+            for (int vertex : pair.second) {
+                std::cout << vertex << " ";
+            }
+            std::cout << std::endl;
+        }
+    }
+};
+
+class DirectedGraphDictionary {
+private:
+    std::unordered_map<int, std::vector<int>> adj;
+
+public:
+    void addEdge(int v, int w) {
+        adj[v].push_back(w);
+    }
+
+    int in(int vertex) {
+        int counter = 0;
+        for (const auto& pair : adj) {
+            for (int neighbor : pair.second) {
+                if (neighbor == vertex) {
+                    counter++;
+                    break;
+                }
+            }
+        }
+        return counter;
+    }
+
+    int out(int vertex) {
+        auto it = adj.find(vertex);
+        if (it != adj.end())
+            return it->second.size();
+        return 0;
+    }
+
+    std::vector<int> neighbors(int vertex) {
+        auto it = adj.find(vertex);
+        if (it != adj.end())
+            return it->second;
+        return {};
+    }
+
+    std::vector<int> vertexes(int vertex) {
+        std::vector<int> verticesList;
+        for (const auto& pair : adj) {
+            for (int neighbor : pair.second) {
+                if (neighbor == vertex) {
+                    verticesList.push_back(pair.first);
+                    break;
+                }
+            }
+        }
+        return verticesList;
+    }
+
+    void printGraph() {
+        for (const auto& pair : adj) {
+            std::cout << pair.first << " -> ";
+            for (int vertex : pair.second) {
+                std::cout << vertex << " ";
+            }
+            std::cout << std::endl;
+        }
+    }
+};
 
 
 int main() {
-
-    //undirected
-    // pairs: (6,4) (4,5) (5,1) (5,2) (5,1) (4,3) (3,2) (2,1)
-
-//    char type;
-//    int vs;
-//
-//
-//    std::cout<<"amount of vertex"<<std::endl;
-//    std::cin >> vs;
-//    UndirectedGraph graph(6);
-//    std::cout<<"add pairs"<<std::endl;
-//
-//    graph.addEdge(6,4);
-//    graph.addEdge(4,5);
-//    graph.addEdge(5,1);
-//    graph.addEdge(5,2);
-//    graph.addEdge(4,3);
-//    graph.addEdge(3,2);
-//    graph.addEdge(2,1);
-//
-//    for(int neighbor: graph.neigbors(5)){
-//        std::cout<<neighbor<<std::endl;
-//    }
-//    std::cout<<graph.degree(5)<<std::endl;
-
-    //directed
-    DirectedGraph graph(6);
-    graph.addEdge(1,2);
-    graph.addEdge(1,3);
-    graph.addEdge(2,3);
-    graph.addEdge(3,4);
-    graph.addEdge(4,1);
-    graph.addEdge(4,2);
-    graph.addEdge(5,4);
-    graph.addEdge(5,6);
-    graph.addEdge(6,2);
-    graph.addEdge(6,3);
-
-
 
     return 0;
 }
