@@ -122,15 +122,7 @@ public:
         return neighList;
     }
 
-    void printGraph() {
-        for (const auto& pair : adj) {
-            std::cout << pair.first << " -> ";
-            for (int vertex : pair.second) {
-                std::cout << vertex << " ";
-            }
-            std::cout << std::endl;
-        }
-    }
+
 };
 
 class DirectedGraphDictionary {
@@ -163,10 +155,15 @@ public:
     }
 
     std::vector<int> neighbors(int vertex) {
-        auto it = adj.find(vertex);
-        if (it != adj.end())
-            return it->second;
-        return {};
+        std::vector<int> result;
+        for (const auto& pair : adj) {
+            for (int neighbor : pair.second) {
+                if (pair.first == vertex) {
+                    result.push_back(neighbor);
+                }
+            }
+        }
+        return result;
     }
 
     std::vector<int> vertexes(int vertex) {
@@ -182,19 +179,61 @@ public:
         return verticesList;
     }
 
-    void printGraph() {
-        for (const auto& pair : adj) {
-            std::cout << pair.first << " -> ";
-            for (int vertex : pair.second) {
-                std::cout << vertex << " ";
-            }
-            std::cout << std::endl;
-        }
-    }
 };
 
 
-int main() {
+class DirectedGraphIncidence{
+private:
+    std::vector<std::vector<int>>inc;
+public:
+    int V;
+    DirectedGraphIncidence(int vert) : V(vert){
+        inc.resize(V+1, std::vector<int>(V+1,0));
+    }
 
-    return 0;
-}
+
+
+
+
+};
+
+class UndirectedGraphIncidence{
+private:
+    std::vector<std::vector<int>>inc;
+public:
+    int V;
+    UndirectedGraphIncidence(int vert) : V(vert){
+        inc.resize(V+1, std::vector<int>(V+1,0));
+    }
+
+    void addEdge(int vertex, int edge){
+        inc[vertex][edge]=1;
+        inc[edge][vertex]=1;
+    }
+
+    int degree(int vertex){
+        int counter = 0;
+        for(int i=0;i<inc[vertex].size();i++){
+            if(inc[vertex][i]==1){
+                counter++;
+            }
+            else{
+                continue;
+            }
+        }
+        return counter;
+    }
+
+    std::vector<int> neighbors(int vertex){
+        std::vector<int> neighborsList;
+        for(int i=0;i<inc[vertex].size();i++){
+            if(inc[vertex][i]==1){
+                neighborsList.push_back(i);
+            }
+            else{
+                continue;
+            }
+        }
+        return neighborsList;
+    }
+};
