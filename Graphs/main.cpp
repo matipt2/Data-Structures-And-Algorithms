@@ -180,60 +180,113 @@ public:
     }
 
 };
-
-
-class DirectedGraphIncidence{
+class UndirectedIncidenceMatrix {
 private:
-    std::vector<std::vector<int>>inc;
+    int vertices;
+    int edges;
+    std::vector<std::vector<int>> incidenceMatrix;
+
 public:
-    int V;
-    DirectedGraphIncidence(int vert) : V(vert){
-        inc.resize(V+1, std::vector<int>(V+1,0));
+    UndirectedIncidenceMatrix(int v, int e) : vertices(v), edges(e) {
+        incidenceMatrix.resize(vertices, std::vector<int>(edges, 0));
     }
 
-
-
-
-
-};
-
-class UndirectedGraphIncidence{
-private:
-    std::vector<std::vector<int>>inc;
-public:
-    int V;
-    UndirectedGraphIncidence(int vert) : V(vert){
-        inc.resize(V+1, std::vector<int>(V+1,0));
-    }
-
-    void addEdge(int vertex, int edge){
-        inc[vertex][edge]=1;
-        inc[edge][vertex]=1;
-    }
-
-    int degree(int vertex){
-        int counter = 0;
-        for(int i=0;i<inc[vertex].size();i++){
-            if(inc[vertex][i]==1){
-                counter++;
-            }
-            else{
-                continue;
-            }
+    void addEdge(int edgeIndex, int vertex1, int vertex2) {
+        if (edgeIndex >= 0 && edgeIndex < edges && vertex1 >= 0 && vertex1 < vertices && vertex2 >= 0 && vertex2 < vertices) {
+            incidenceMatrix[vertex1][edgeIndex] = 1;
+            incidenceMatrix[vertex2][edgeIndex] = 1;
+        } else {
+            std::cout << "invalid edge or vertex index!" << std::endl;
         }
-        return counter;
     }
 
-    std::vector<int> neighbors(int vertex){
-        std::vector<int> neighborsList;
-        for(int i=0;i<inc[vertex].size();i++){
-            if(inc[vertex][i]==1){
-                neighborsList.push_back(i);
+    void degree(int vertex) {
+        if (vertex >= 0 && vertex < vertices) {
+            int degree = 0;
+            for (int j = 0; j < edges; ++j) {
+                if (incidenceMatrix[vertex][j] == 1)
+                    degree++;
             }
-            else{
-                continue;
-            }
+            std::cout << "degree of vertex " << vertex << ": " << degree << std::endl;
+        } else {
+            std::cout << "invalid vertex index!" << std::endl;
         }
-        return neighborsList;
+    }
+
+    void neighbors(int vertex) {
+        if (vertex >= 0 && vertex < vertices) {
+            std::cout << "neighbors " << vertex << ": ";
+            for (int i = 0; i < vertices; ++i) {
+                if (i != vertex && incidenceMatrix[vertex][i] == 1)
+                    std::cout << i << " ";
+            }
+            std::cout << std::endl;
+        } else {
+            std::cout << "invalid vertex index!" << std::endl;
+        }
     }
 };
+class DirectedIncidenceMatrix {
+private:
+    int vertices;
+    int edges;
+    std::vector<std::vector<int>> incidenceMatrix;
+
+public:
+    DirectedIncidenceMatrix(int v, int e) : vertices(v), edges(e) {
+        incidenceMatrix.resize(vertices, std::vector<int>(edges, 0));
+    }
+
+    void addEdge(int edgeIndex, int fromVertex, int toVertex) {
+        if (edgeIndex >= 0 && edgeIndex < edges && fromVertex >= 0 && fromVertex < vertices && toVertex >= 0 && toVertex < vertices) {
+            incidenceMatrix[fromVertex][edgeIndex] = -1;
+            incidenceMatrix[toVertex][edgeIndex] = 1;
+        } else {
+            std::cout << "invalid edge or vertex index!" << std::endl;
+        }
+    }
+
+    void outDegree(int vertex) {
+        if (vertex >= 0 && vertex < vertices) {
+            int outDegree = 0;
+            for (int j = 0; j < edges; ++j) {
+                if (incidenceMatrix[vertex][j] == 1)
+                    outDegree++;
+            }
+            std::cout << "out degree " << vertex << ": " << outDegree << std::endl;
+        } else {
+            std::cout << "invalid vertex index!" << std::endl;
+        }
+    }
+
+    void inDegree(int vertex) {
+        if (vertex >= 0 && vertex < vertices) {
+            int inDegree = 0;
+            for (int j = 0; j < edges; ++j) {
+                if (incidenceMatrix[vertex][j] == -1)
+                    inDegree++;
+            }
+            std::cout << "in degree " << vertex << ": " << inDegree << std::endl;
+        } else {
+            std::cout << "invalid vertex index!" << std::endl;
+        }
+    }
+
+    void adjacentVertices(int vertex) {
+        if (vertex >= 0 && vertex < vertices) {
+            std::cout << "vertices adjacent to vertex " << vertex << ": ";
+            for (int i = 0; i < vertices; ++i) {
+                if (i != vertex && (incidenceMatrix[vertex][i] == -1 || incidenceMatrix[vertex][i] == 1))
+                    std::cout << i << " ";
+            }
+            std::cout << std::endl;
+        } else {
+            std::cout << "invalid vertex index!" << std::endl;
+        }
+    }
+};
+
+
+int main() {
+    return 0;
+}
